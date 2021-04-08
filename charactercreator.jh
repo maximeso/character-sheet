@@ -18,56 +18,55 @@ enum SkillAcquisition {
 }
 
 entity Character {
-	name String
-    alignment String
-    experience Integer
-    alignment Alignment
+	name String required
+    alignment String required
+    experience Integer required
+    alignment Alignment required
     party String
 }
 
 entity CharacterSkill {
-	event String
-    realCost Integer
+	event String required
+    realCost Integer required
 }
 
 entity Item {
-	reference String
-	name String
-    comment Integer
+	reference String required
+	name String required
+    comment Integer required
 }
 
 entity Deity {
-	name String
+	name String required
 }
 
 entity Career {
-	name String
+	name String required
 }
 
 entity Race {
-	name String
+	name String required
 }
 
 entity Skill {
-	name String
-    cost Integer
-    restriction String
+	name String required
+    cost Integer required
+    restriction String required
 }
 
 relationship ManyToOne {
-	Character{skills(name)} to CharacterSkill
+	Character{skills(name)} to CharacterSkill{owner(name)}
 	Character{deity(name)} to Deity
 	Character{blood(name)} to Deity
 	Character{race(name)} to Race
 	Character{career(name)} to Career
 	Item{owner(name)} to Character{inventories(name)}
     
+	CharacterSkill{skill(name)} to Skill
+    
     Skill{racialCondition(name)} to Race
     Skill{careerCondition(name)} to Career
     Skill{skillCondition(name)} to Skill
-}
-relationship OneToOne {
-	CharacterSkill{skills(name)} to Skill
 }
 
 paginate all with infinite-scroll
