@@ -125,9 +125,6 @@ export const Character = (props: ICharacterProps) => {
                     <Translate contentKey="characterSheetApp.character.party">Party</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th>
-                    <Translate contentKey="characterSheetApp.character.skills">Skills</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
-                  <th>
                     <Translate contentKey="characterSheetApp.character.deity">Deity</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th>
@@ -156,7 +153,6 @@ export const Character = (props: ICharacterProps) => {
                     </td>
                     <td>{character.experience}</td>
                     <td>{character.party}</td>
-                    <td>{character.skills ? <Link to={`character-skill/${character.skills.id}`}>{character.skills.name}</Link> : ''}</td>
                     <td>{character.deity ? <Link to={`deity/${character.deity.id}`}>{character.deity.name}</Link> : ''}</td>
                     <td>{character.blood ? <Link to={`deity/${character.blood.id}`}>{character.blood.name}</Link> : ''}</td>
                     <td>{character.race ? <Link to={`race/${character.race.id}`}>{character.race.name}</Link> : ''}</td>

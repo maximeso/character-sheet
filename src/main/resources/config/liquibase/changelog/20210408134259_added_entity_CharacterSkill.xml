@@ -15,13 +15,16 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="event" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="real_cost" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="owner_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="skills_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_character_skill__skills_id" />
+            <column name="skill_id" type="bigint">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

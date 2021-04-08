@@ -56,6 +56,7 @@ public class CacheConfiguration {
             createCache(cm, com.iledeslegendes.charactersheet.domain.Career.class.getName());
             createCache(cm, com.iledeslegendes.charactersheet.domain.Race.class.getName());
             createCache(cm, com.iledeslegendes.charactersheet.domain.Skill.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Character.class.getName() + ".skills");
             // jhipster-needle-ehcache-add-entry
         };
     }

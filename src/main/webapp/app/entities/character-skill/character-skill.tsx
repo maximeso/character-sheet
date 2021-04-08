@@ -119,7 +119,10 @@ export const CharacterSkill = (props: ICharacterSkillProps) => {
                     <Translate contentKey="characterSheetApp.characterSkill.realCost">Real Cost</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th>
-                    <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate> <FontAwesomeIcon icon="sort" />
+                    <Translate contentKey="characterSheetApp.characterSkill.owner">Owner</Translate> <FontAwesomeIcon icon="sort" />
+                  </th>
+                  <th>
+                    <Translate contentKey="characterSheetApp.characterSkill.skill">Skill</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
                   <th />
                 </tr>
@@ -135,8 +138,9 @@ export const CharacterSkill = (props: ICharacterSkillProps) => {
                     <td>{characterSkill.event}</td>
                     <td>{characterSkill.realCost}</td>
                     <td>
-                      {characterSkill.skills ? <Link to={`skill/${characterSkill.skills.id}`}>{characterSkill.skills.name}</Link> : ''}
+                      {characterSkill.owner ? <Link to={`character/${characterSkill.owner.id}`}>{characterSkill.owner.name}</Link> : ''}
                     </td>
+                    <td>{characterSkill.skill ? <Link to={`skill/${characterSkill.skill.id}`}>{characterSkill.skill.name}</Link> : ''}</td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`${match.url}/${characterSkill.id}`} color="info" size="sm" data-cy="entityDetailsButton">

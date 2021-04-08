@@ -8,12 +8,6 @@
     -->
     <changeSet id="20210408134258-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="skills_id"
-                                 baseTableName="character"
-                                 constraintName="fk_character__skills_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="character_skill"/>
-
         <addForeignKeyConstraint baseColumnNames="deity_id"
                                  baseTableName="character"
                                  constraintName="fk_character__deity_id"

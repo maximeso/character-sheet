@@ -133,6 +133,57 @@ class CharacterResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterRepository.findAll().size();
+        // set the field null
+        character.setName(null);
+
+        // Create the Character, which fails.
+
+        restCharacterMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(character)))
+            .andExpect(status().isBadRequest());
+
+        List<Character> characterList = characterRepository.findAll();
+        assertThat(characterList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkAlignmentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterRepository.findAll().size();
+        // set the field null
+        character.setAlignment(null);
+
+        // Create the Character, which fails.
+
+        restCharacterMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(character)))
+            .andExpect(status().isBadRequest());
+
+        List<Character> characterList = characterRepository.findAll();
+        assertThat(characterList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkExperienceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterRepository.findAll().size();
+        // set the field null
+        character.setExperience(null);
+
+        // Create the Character, which fails.
+
+        restCharacterMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(character)))
+            .andExpect(status().isBadRequest());
+
+        List<Character> characterList = characterRepository.findAll();
+        assertThat(characterList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCharacters() throws Exception {
         // Initialize the database
         characterRepository.saveAndFlush(character);

@@ -3,21 +3,29 @@
   "fields": [
     {
       "fieldName": "event",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "realCost",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
+      "relationshipType": "many-to-one",
+      "otherEntityName": "character",
+      "otherEntityRelationshipName": "skills",
+      "relationshipName": "owner",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "skill",
       "otherEntityRelationshipName": "characterSkill",
-      "relationshipName": "skills",
-      "otherEntityField": "name",
-      "ownerSide": true
+      "relationshipName": "skill",
+      "otherEntityField": "name"
     }
   ],
   "entityTableName": "character_skill",

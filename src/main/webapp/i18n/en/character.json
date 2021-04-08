@@ -22,12 +22,12 @@
       "alignment": "Alignment",
       "experience": "Experience",
       "party": "Party",
-      "skills": "Skills",
       "deity": "Deity",
       "blood": "Blood",
       "race": "Race",
       "career": "Career",
-      "inventories": "Inventories"
+      "inventories": "Inventories",
+      "skills": "Skills"
     }
   }
 }

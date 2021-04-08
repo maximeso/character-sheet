@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,7 @@ public class DeityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/deities")
-    public ResponseEntity<Deity> createDeity(@RequestBody Deity deity) throws URISyntaxException {
+    public ResponseEntity<Deity> createDeity(@Valid @RequestBody Deity deity) throws URISyntaxException {
         log.debug("REST request to save Deity : {}", deity);
         if (deity.getId() != null) {
             throw new BadRequestAlertException("A new deity cannot already have an ID", ENTITY_NAME, "idexists");
@@ -77,7 +79,7 @@ public class DeityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/deities/{id}")
-    public ResponseEntity<Deity> updateDeity(@PathVariable(value = "id", required = false) final Long id, @RequestBody Deity deity)
+    public ResponseEntity<Deity> updateDeity(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Deity deity)
         throws URISyntaxException {
         log.debug("REST request to update Deity : {}, {}", id, deity);
         if (deity.getId() == null) {
@@ -110,8 +112,10 @@ public class DeityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/deities/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Deity> partialUpdateDeity(@PathVariable(value = "id", required = false) final Long id, @RequestBody Deity deity)
-        throws URISyntaxException {
+    public ResponseEntity<Deity> partialUpdateDeity(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody Deity deity
+    ) throws URISyntaxException {
         log.debug("REST request to partial update Deity partially : {}, {}", id, deity);
         if (deity.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

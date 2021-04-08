@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,7 @@ public class RaceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/races")
-    public ResponseEntity<Race> createRace(@RequestBody Race race) throws URISyntaxException {
+    public ResponseEntity<Race> createRace(@Valid @RequestBody Race race) throws URISyntaxException {
         log.debug("REST request to save Race : {}", race);
         if (race.getId() != null) {
             throw new BadRequestAlertException("A new race cannot already have an ID", ENTITY_NAME, "idexists");
@@ -77,7 +79,7 @@ public class RaceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/races/{id}")
-    public ResponseEntity<Race> updateRace(@PathVariable(value = "id", required = false) final Long id, @RequestBody Race race)
+    public ResponseEntity<Race> updateRace(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Race race)
         throws URISyntaxException {
         log.debug("REST request to update Race : {}, {}", id, race);
         if (race.getId() == null) {
@@ -110,8 +112,10 @@ public class RaceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/races/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Race> partialUpdateRace(@PathVariable(value = "id", required = false) final Long id, @RequestBody Race race)
-        throws URISyntaxException {
+    public ResponseEntity<Race> partialUpdateRace(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody Race race
+    ) throws URISyntaxException {
         log.debug("REST request to partial update Race partially : {}, {}", id, race);
         if (race.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

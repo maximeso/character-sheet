@@ -7,6 +7,8 @@ import { Translate, translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { ICharacter } from 'app/shared/model/character.model';
+import { getEntities as getCharacters } from 'app/entities/character/character.reducer';
 import { ISkill } from 'app/shared/model/skill.model';
 import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './character-skill.reducer';
@@ -19,7 +21,7 @@ export interface ICharacterSkillUpdateProps extends StateProps, DispatchProps, R
 export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { characterSkillEntity, skills, loading, updating } = props;
+  const { characterSkillEntity, characters, skills, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/character-skill');
@@ -30,6 +32,7 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
       props.getEntity(props.match.params.id);
     }
 
+    props.getCharacters();
     props.getSkills();
   }, []);
 
@@ -44,7 +47,8 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
       const entity = {
         ...characterSkillEntity,
         ...values,
-        skills: skills.find(it => it.id.toString() === values.skillsId.toString()),
+        owner: characters.find(it => it.id.toString() === values.ownerId.toString()),
+        skill: skills.find(it => it.id.toString() === values.skillId.toString()),
       };
 
       if (isNew) {
@@ -82,19 +86,52 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
                 <Label id="eventLabel" for="character-skill-event">
                   <Translate contentKey="characterSheetApp.characterSkill.event">Event</Translate>
                 </Label>
-                <AvField id="character-skill-event" data-cy="event" type="text" name="event" />
+                <AvField
+                  id="character-skill-event"
+                  data-cy="event"
+                  type="text"
+                  name="event"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="realCostLabel" for="character-skill-realCost">
                   <Translate contentKey="characterSheetApp.characterSkill.realCost">Real Cost</Translate>
                 </Label>
-                <AvField id="character-skill-realCost" data-cy="realCost" type="string" className="form-control" name="realCost" />
+                <AvField
+                  id="character-skill-realCost"
+                  data-cy="realCost"
+                  type="string"
+                  className="form-control"
+                  name="realCost"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
-                <Label for="character-skill-skills">
-                  <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate>
+                <Label for="character-skill-owner">
+                  <Translate contentKey="characterSheetApp.characterSkill.owner">Owner</Translate>
                 </Label>
-                <AvInput id="character-skill-skills" data-cy="skills" type="select" className="form-control" name="skillsId">
+                <AvInput id="character-skill-owner" data-cy="owner" type="select" className="form-control" name="ownerId">
+                  <option value="" key="0" />
+                  {characters
+                    ? characters.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.name}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
+                <Label for="character-skill-skill">
+                  <Translate contentKey="characterSheetApp.characterSkill.skill">Skill</Translate>
+                </Label>
+                <AvInput id="character-skill-skill" data-cy="skill" type="select" className="form-control" name="skillId">
                   <option value="" key="0" />
                   {skills
                     ? skills.map(otherEntity => (
@@ -127,6 +164,7 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  characters: storeState.character.entities,
   skills: storeState.skill.entities,
   characterSkillEntity: storeState.characterSkill.entity,
   loading: storeState.characterSkill.loading,
@@ -135,6 +173,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getCharacters,
   getSkills,
   getEntity,
   updateEntity,

@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,8 @@ public class CharacterSkillResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/character-skills")
-    public ResponseEntity<CharacterSkill> createCharacterSkill(@RequestBody CharacterSkill characterSkill) throws URISyntaxException {
+    public ResponseEntity<CharacterSkill> createCharacterSkill(@Valid @RequestBody CharacterSkill characterSkill)
+        throws URISyntaxException {
         log.debug("REST request to save CharacterSkill : {}", characterSkill);
         if (characterSkill.getId() != null) {
             throw new BadRequestAlertException("A new characterSkill cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +82,7 @@ public class CharacterSkillResource {
     @PutMapping("/character-skills/{id}")
     public ResponseEntity<CharacterSkill> updateCharacterSkill(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody CharacterSkill characterSkill
+        @Valid @RequestBody CharacterSkill characterSkill
     ) throws URISyntaxException {
         log.debug("REST request to update CharacterSkill : {}, {}", id, characterSkill);
         if (characterSkill.getId() == null) {
@@ -114,7 +117,7 @@ public class CharacterSkillResource {
     @PatchMapping(value = "/character-skills/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<CharacterSkill> partialUpdateCharacterSkill(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody CharacterSkill characterSkill
+        @NotNull @RequestBody CharacterSkill characterSkill
     ) throws URISyntaxException {
         log.debug("REST request to partial update CharacterSkill partially : {}, {}", id, characterSkill);
         if (characterSkill.getId() == null) {

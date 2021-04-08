@@ -55,10 +55,6 @@ export const CharacterDetail = (props: ICharacterDetailProps) => {
           </dt>
           <dd>{characterEntity.party}</dd>
           <dt>
-            <Translate contentKey="characterSheetApp.character.skills">Skills</Translate>
-          </dt>
-          <dd>{characterEntity.skills ? characterEntity.skills.name : ''}</dd>
-          <dt>
             <Translate contentKey="characterSheetApp.character.deity">Deity</Translate>
           </dt>
           <dd>{characterEntity.deity ? characterEntity.deity.name : ''}</dd>
