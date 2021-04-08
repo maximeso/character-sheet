@@ -45,7 +45,6 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
         ...characterSkillEntity,
         ...values,
         skills: skills.find(it => it.id.toString() === values.skillsId.toString()),
-        skills: skills.find(it => it.id.toString() === values.skillsId.toString()),
       };
 
       if (isNew) {
@@ -90,21 +89,6 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
                   <Translate contentKey="characterSheetApp.characterSkill.realCost">Real Cost</Translate>
                 </Label>
                 <AvField id="character-skill-realCost" data-cy="realCost" type="string" className="form-control" name="realCost" />
-              </AvGroup>
-              <AvGroup>
-                <Label for="character-skill-skills">
-                  <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate>
-                </Label>
-                <AvInput id="character-skill-skills" data-cy="skills" type="select" className="form-control" name="skillsId">
-                  <option value="" key="0" />
-                  {skills
-                    ? skills.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.name}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
               </AvGroup>
               <AvGroup>
                 <Label for="character-skill-skills">

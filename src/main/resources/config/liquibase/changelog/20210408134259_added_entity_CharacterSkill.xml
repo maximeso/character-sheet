@@ -23,9 +23,6 @@
             <column name="skills_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_character_skill__skills_id" />
             </column>
-            <column name="skills_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>

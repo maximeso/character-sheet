@@ -121,9 +121,6 @@ export const CharacterSkill = (props: ICharacterSkillProps) => {
                   <th>
                     <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate> <FontAwesomeIcon icon="sort" />
                   </th>
-                  <th>
-                    <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate> <FontAwesomeIcon icon="sort" />
-                  </th>
                   <th />
                 </tr>
               </thead>
@@ -137,9 +134,6 @@ export const CharacterSkill = (props: ICharacterSkillProps) => {
                     </td>
                     <td>{characterSkill.event}</td>
                     <td>{characterSkill.realCost}</td>
-                    <td>
-                      {characterSkill.skills ? <Link to={`skill/${characterSkill.skills.id}`}>{characterSkill.skills.name}</Link> : ''}
-                    </td>
                     <td>
                       {characterSkill.skills ? <Link to={`skill/${characterSkill.skills.id}`}>{characterSkill.skills.name}</Link> : ''}
                     </td>

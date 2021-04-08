@@ -5,7 +5,6 @@ export interface ICharacterSkill {
   event?: string | null;
   realCost?: number | null;
   skills?: ISkill | null;
-  skills?: ISkill | null;
 }
 
 export const defaultValue: Readonly<ICharacterSkill> = {};

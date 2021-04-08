@@ -38,7 +38,7 @@ public class Character implements Serializable {
     private String party;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "skills", "skills" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "skills" }, allowSetters = true)
     private CharacterSkill skills;
 
     @ManyToOne

@@ -13,11 +13,5 @@
                                  constraintName="fk_character_skill__skills_id"
                                  referencedColumnNames="id"
                                  referencedTableName="skill"/>
-
-        <addForeignKeyConstraint baseColumnNames="skills_id"
-                                 baseTableName="character_skill"
-                                 constraintName="fk_character_skill__skills_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="skill"/>
     </changeSet>
 </databaseChangeLog>
