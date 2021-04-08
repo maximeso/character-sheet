@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,21 +25,24 @@ public class Character implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "alignment")
+    @Column(name = "alignment", nullable = false)
     private Alignment alignment;
 
-    @Column(name = "experience")
+    @NotNull
+    @Column(name = "experience", nullable = false)
     private Integer experience;
 
     @Column(name = "party")
     private String party;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "skills" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "skill", "owners" }, allowSetters = true)
     private CharacterSkill skills;
 
     @ManyToOne

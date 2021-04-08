@@ -112,6 +112,23 @@ class DeityResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = deityRepository.findAll().size();
+        // set the field null
+        deity.setName(null);
+
+        // Create the Deity, which fails.
+
+        restDeityMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(deity)))
+            .andExpect(status().isBadRequest());
+
+        List<Deity> deityList = deityRepository.findAll();
+        assertThat(deityList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllDeities() throws Exception {
         // Initialize the database
         deityRepository.saveAndFlush(deity);

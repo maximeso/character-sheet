@@ -7,9 +7,9 @@ import { Alignment } from 'app/shared/model/enumerations/alignment.model';
 
 export interface ICharacter {
   id?: number;
-  name?: string | null;
-  alignment?: Alignment | null;
-  experience?: number | null;
+  name?: string;
+  alignment?: Alignment;
+  experience?: number;
   party?: string | null;
   skills?: ICharacterSkill | null;
   deity?: IDeity | null;

@@ -2,7 +2,10 @@ package com.iledeslegendes.charactersheet.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,16 +24,22 @@ public class CharacterSkill implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "event")
+    @NotNull
+    @Column(name = "event", nullable = false)
     private String event;
 
-    @Column(name = "real_cost")
+    @NotNull
+    @Column(name = "real_cost", nullable = false)
     private Integer realCost;
 
+    @ManyToOne
     @JsonIgnoreProperties(value = { "racialCondition", "careerCondition", "skillCondition" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Skill skills;
+    private Skill skill;
+
+    @OneToMany(mappedBy = "skills")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "skills", "deity", "blood", "race", "career", "inventories" }, allowSetters = true)
+    private Set<Character> owners = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -72,17 +81,48 @@ public class CharacterSkill implements Serializable {
         this.realCost = realCost;
     }
 
-    public Skill getSkills() {
-        return this.skills;
+    public Skill getSkill() {
+        return this.skill;
     }
 
-    public CharacterSkill skills(Skill skill) {
-        this.setSkills(skill);
+    public CharacterSkill skill(Skill skill) {
+        this.setSkill(skill);
         return this;
     }
 
-    public void setSkills(Skill skill) {
-        this.skills = skill;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
+    public Set<Character> getOwners() {
+        return this.owners;
+    }
+
+    public CharacterSkill owners(Set<Character> characters) {
+        this.setOwners(characters);
+        return this;
+    }
+
+    public CharacterSkill addOwner(Character character) {
+        this.owners.add(character);
+        character.setSkills(this);
+        return this;
+    }
+
+    public CharacterSkill removeOwner(Character character) {
+        this.owners.remove(character);
+        character.setSkills(null);
+        return this;
+    }
+
+    public void setOwners(Set<Character> characters) {
+        if (this.owners != null) {
+            this.owners.forEach(i -> i.setSkills(null));
+        }
+        if (characters != null) {
+            characters.forEach(i -> i.setSkills(this));
+        }
+        this.owners = characters;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

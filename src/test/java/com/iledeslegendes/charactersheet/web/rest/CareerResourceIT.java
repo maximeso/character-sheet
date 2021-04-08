@@ -112,6 +112,23 @@ class CareerResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = careerRepository.findAll().size();
+        // set the field null
+        career.setName(null);
+
+        // Create the Career, which fails.
+
+        restCareerMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(career)))
+            .andExpect(status().isBadRequest());
+
+        List<Career> careerList = careerRepository.findAll();
+        assertThat(careerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCareers() throws Exception {
         // Initialize the database
         careerRepository.saveAndFlush(career);

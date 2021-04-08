@@ -112,6 +112,23 @@ class RaceResourceIT {
 
     @Test
     @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = raceRepository.findAll().size();
+        // set the field null
+        race.setName(null);
+
+        // Create the Race, which fails.
+
+        restRaceMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(race)))
+            .andExpect(status().isBadRequest());
+
+        List<Race> raceList = raceRepository.findAll();
+        assertThat(raceList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllRaces() throws Exception {
         // Initialize the database
         raceRepository.saveAndFlush(race);

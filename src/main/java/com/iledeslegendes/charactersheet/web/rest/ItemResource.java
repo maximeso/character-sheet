@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,7 @@ public class ItemResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/items")
-    public ResponseEntity<Item> createItem(@RequestBody Item item) throws URISyntaxException {
+    public ResponseEntity<Item> createItem(@Valid @RequestBody Item item) throws URISyntaxException {
         log.debug("REST request to save Item : {}", item);
         if (item.getId() != null) {
             throw new BadRequestAlertException("A new item cannot already have an ID", ENTITY_NAME, "idexists");
@@ -77,7 +79,7 @@ public class ItemResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/items/{id}")
-    public ResponseEntity<Item> updateItem(@PathVariable(value = "id", required = false) final Long id, @RequestBody Item item)
+    public ResponseEntity<Item> updateItem(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Item item)
         throws URISyntaxException {
         log.debug("REST request to update Item : {}, {}", id, item);
         if (item.getId() == null) {
@@ -110,8 +112,10 @@ public class ItemResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/items/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<Item> partialUpdateItem(@PathVariable(value = "id", required = false) final Long id, @RequestBody Item item)
-        throws URISyntaxException {
+    public ResponseEntity<Item> partialUpdateItem(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody Item item
+    ) throws URISyntaxException {
         log.debug("REST request to partial update Item partially : {}, {}", id, item);
         if (item.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

@@ -3,6 +3,7 @@ package com.iledeslegendes.charactersheet.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,13 +22,16 @@ public class Item implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "reference")
+    @NotNull
+    @Column(name = "reference", nullable = false)
     private String reference;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "comment")
+    @NotNull
+    @Column(name = "comment", nullable = false)
     private Integer comment;
 
     @ManyToOne
