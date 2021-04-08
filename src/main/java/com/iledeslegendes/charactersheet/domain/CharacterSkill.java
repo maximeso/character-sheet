@@ -3,6 +3,7 @@ package com.iledeslegendes.charactersheet.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,16 +22,21 @@ public class CharacterSkill implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "event")
+    @NotNull
+    @Column(name = "event", nullable = false)
     private String event;
 
-    @Column(name = "real_cost")
+    @NotNull
+    @Column(name = "real_cost", nullable = false)
     private Integer realCost;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "deity", "blood", "race", "career", "inventories", "skills" }, allowSetters = true)
+    private Character owner;
+
+    @ManyToOne
     @JsonIgnoreProperties(value = { "racialCondition", "careerCondition", "skillCondition" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Skill skills;
+    private Skill skill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -72,17 +78,30 @@ public class CharacterSkill implements Serializable {
         this.realCost = realCost;
     }
 
-    public Skill getSkills() {
-        return this.skills;
+    public Character getOwner() {
+        return this.owner;
     }
 
-    public CharacterSkill skills(Skill skill) {
-        this.setSkills(skill);
+    public CharacterSkill owner(Character character) {
+        this.setOwner(character);
         return this;
     }
 
-    public void setSkills(Skill skill) {
-        this.skills = skill;
+    public void setOwner(Character character) {
+        this.owner = character;
+    }
+
+    public Skill getSkill() {
+        return this.skill;
+    }
+
+    public CharacterSkill skill(Skill skill) {
+        this.setSkill(skill);
+        return this;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -3,9 +3,9 @@ import { ICareer } from 'app/shared/model/career.model';
 
 export interface ISkill {
   id?: number;
-  name?: string | null;
-  cost?: number | null;
-  restriction?: string | null;
+  name?: string;
+  cost?: number;
+  restriction?: string;
   racialCondition?: IRace | null;
   careerCondition?: ICareer | null;
   skillCondition?: ISkill | null;

@@ -77,7 +77,15 @@ export const CareerUpdate = (props: ICareerUpdateProps) => {
                 <Label id="nameLabel" for="career-name">
                   <Translate contentKey="characterSheetApp.career.name">Name</Translate>
                 </Label>
-                <AvField id="career-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="career-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/career" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

@@ -1,6 +1,6 @@
 export interface ICareer {
   id?: number;
-  name?: string | null;
+  name?: string;
 }
 
 export const defaultValue: Readonly<ICareer> = {};

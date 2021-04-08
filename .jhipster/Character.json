@@ -3,16 +3,19 @@
   "fields": [
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "alignment",
       "fieldType": "Alignment",
-      "fieldValues": "LAWFUL_GOOD,NEUTRAL_GOOD,CHAOTIC_GOOD,LAWFUL_NEUTRAL,NEUTRAL_NEUTRAL,CHAOTIC_NEUTRAL,LAWFUL_EVIL,NEUTRAL_EVIL,CHAOTIC_EVIL"
+      "fieldValues": "LAWFUL_GOOD,NEUTRAL_GOOD,CHAOTIC_GOOD,LAWFUL_NEUTRAL,NEUTRAL_NEUTRAL,CHAOTIC_NEUTRAL,LAWFUL_EVIL,NEUTRAL_EVIL,CHAOTIC_EVIL",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "experience",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "party",
@@ -20,13 +23,6 @@
     }
   ],
   "relationships": [
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "characterSkill",
-      "otherEntityRelationshipName": "character",
-      "relationshipName": "skills",
-      "otherEntityField": "name"
-    },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "deity",
@@ -60,6 +56,13 @@
       "otherEntityName": "item",
       "otherEntityRelationshipName": "owner",
       "relationshipName": "inventories",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "characterSkill",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "skills",
       "otherEntityField": "name"
     }
   ],

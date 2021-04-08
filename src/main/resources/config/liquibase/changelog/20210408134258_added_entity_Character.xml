@@ -15,18 +15,15 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="alignment" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="experience" type="integer">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="party" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="skills_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="deity_id" type="bigint">

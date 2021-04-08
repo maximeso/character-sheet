@@ -77,7 +77,15 @@ export const RaceUpdate = (props: IRaceUpdateProps) => {
                 <Label id="nameLabel" for="race-name">
                   <Translate contentKey="characterSheetApp.race.name">Name</Translate>
                 </Label>
-                <AvField id="race-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="race-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/race" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

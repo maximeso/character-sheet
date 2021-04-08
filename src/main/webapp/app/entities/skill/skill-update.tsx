@@ -89,19 +89,45 @@ export const SkillUpdate = (props: ISkillUpdateProps) => {
                 <Label id="nameLabel" for="skill-name">
                   <Translate contentKey="characterSheetApp.skill.name">Name</Translate>
                 </Label>
-                <AvField id="skill-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="skill-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="costLabel" for="skill-cost">
                   <Translate contentKey="characterSheetApp.skill.cost">Cost</Translate>
                 </Label>
-                <AvField id="skill-cost" data-cy="cost" type="string" className="form-control" name="cost" />
+                <AvField
+                  id="skill-cost"
+                  data-cy="cost"
+                  type="string"
+                  className="form-control"
+                  name="cost"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="restrictionLabel" for="skill-restriction">
                   <Translate contentKey="characterSheetApp.skill.restriction">Restriction</Translate>
                 </Label>
-                <AvField id="skill-restriction" data-cy="restriction" type="text" name="restriction" />
+                <AvField
+                  id="skill-restriction"
+                  data-cy="restriction"
+                  type="text"
+                  name="restriction"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label for="skill-racialCondition">

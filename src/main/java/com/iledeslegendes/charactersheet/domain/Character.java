@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -24,22 +25,21 @@ public class Character implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "alignment")
+    @Column(name = "alignment", nullable = false)
     private Alignment alignment;
 
-    @Column(name = "experience")
+    @NotNull
+    @Column(name = "experience", nullable = false)
     private Integer experience;
 
     @Column(name = "party")
     private String party;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "skills" }, allowSetters = true)
-    private CharacterSkill skills;
 
     @ManyToOne
     private Deity deity;
@@ -57,6 +57,11 @@ public class Character implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "owner" }, allowSetters = true)
     private Set<Item> inventories = new HashSet<>();
+
+    @OneToMany(mappedBy = "owner")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "owner", "skill" }, allowSetters = true)
+    private Set<CharacterSkill> skills = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -122,19 +127,6 @@ public class Character implements Serializable {
 
     public void setParty(String party) {
         this.party = party;
-    }
-
-    public CharacterSkill getSkills() {
-        return this.skills;
-    }
-
-    public Character skills(CharacterSkill characterSkill) {
-        this.setSkills(characterSkill);
-        return this;
-    }
-
-    public void setSkills(CharacterSkill characterSkill) {
-        this.skills = characterSkill;
     }
 
     public Deity getDeity() {
@@ -218,6 +210,37 @@ public class Character implements Serializable {
             items.forEach(i -> i.setOwner(this));
         }
         this.inventories = items;
+    }
+
+    public Set<CharacterSkill> getSkills() {
+        return this.skills;
+    }
+
+    public Character skills(Set<CharacterSkill> characterSkills) {
+        this.setSkills(characterSkills);
+        return this;
+    }
+
+    public Character addSkills(CharacterSkill characterSkill) {
+        this.skills.add(characterSkill);
+        characterSkill.setOwner(this);
+        return this;
+    }
+
+    public Character removeSkills(CharacterSkill characterSkill) {
+        this.skills.remove(characterSkill);
+        characterSkill.setOwner(null);
+        return this;
+    }
+
+    public void setSkills(Set<CharacterSkill> characterSkills) {
+        if (this.skills != null) {
+            this.skills.forEach(i -> i.setOwner(null));
+        }
+        if (characterSkills != null) {
+            characterSkills.forEach(i -> i.setOwner(this));
+        }
+        this.skills = characterSkills;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
