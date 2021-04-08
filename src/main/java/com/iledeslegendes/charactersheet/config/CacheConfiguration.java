@@ -48,6 +48,14 @@ public class CacheConfiguration {
             createCache(cm, com.iledeslegendes.charactersheet.domain.User.class.getName());
             createCache(cm, com.iledeslegendes.charactersheet.domain.Authority.class.getName());
             createCache(cm, com.iledeslegendes.charactersheet.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Character.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Character.class.getName() + ".inventories");
+            createCache(cm, com.iledeslegendes.charactersheet.domain.CharacterSkill.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Item.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Deity.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Career.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Race.class.getName());
+            createCache(cm, com.iledeslegendes.charactersheet.domain.Skill.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -42,7 +42,9 @@
     "jwtSecretKey": "ZGI1ODczYTI2OTFmN2E4MGU2MThjMjc3MGIzMGJlZjgwMjk3N2VhNDg3MDdmYTZiMzMxZjQxNjM1YzNiNTllYzcxNjcyYWIwYTcxOTVmMjNiZjkwNjBhNmVmY2Q2NmI1Zjc2NTg0N2Q2ODA5ZTkzMzlhZTBhZGJkNzUxOGVlYWQ=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Character", "CharacterSkill", "Item", "Deity", "Career", "Race", "Skill"],
+    "lastLiquibaseTimestamp": 1617889384000
   },
   "git-provider": "GitHub",
   "git-company": "maximeso",

@@ -1,0 +1,40 @@
+{
+  "name": "CharacterSkill",
+  "fields": [
+    {
+      "fieldName": "event",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "realCost",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "characterSkill",
+      "relationshipName": "skills",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "characterSkill",
+      "relationshipName": "skills",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "character_skill",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210408134259"
+}

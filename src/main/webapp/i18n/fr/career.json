@@ -1,0 +1,24 @@
+{
+  "characterSheetApp": {
+    "career": {
+      "home": {
+        "title": "Careers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Career",
+        "createOrEditLabel": "Créer ou éditer un Career",
+        "notFound": "Aucun Career trouvé"
+      },
+      "created": "Un nouveau Career a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Career avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Career avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Career {{ id }} ?"
+      },
+      "detail": {
+        "title": "Career"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

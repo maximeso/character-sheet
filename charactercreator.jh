@@ -1,0 +1,75 @@
+
+enum Alignment {
+    LAWFUL_GOOD,
+    NEUTRAL_GOOD,
+    CHAOTIC_GOOD,
+    LAWFUL_NEUTRAL,
+    NEUTRAL_NEUTRAL,
+    CHAOTIC_NEUTRAL,
+    LAWFUL_EVIL,
+    NEUTRAL_EVIL,
+    CHAOTIC_EVIL
+}
+
+enum SkillAcquisition {
+    CREATION,
+    LEVELUP,
+    REWARD
+}
+
+entity Character {
+	name String
+    alignment String
+    experience Integer
+    alignment Alignment
+    party String
+}
+
+entity CharacterSkill {
+	event String
+    realCost Integer
+}
+
+entity Item {
+	reference String
+	name String
+    comment Integer
+}
+
+entity Deity {
+	name String
+}
+
+entity Career {
+	name String
+}
+
+entity Race {
+	name String
+}
+
+entity Skill {
+	name String
+    cost Integer
+    restriction String
+}
+
+relationship ManyToOne {
+	Character{skills(name)} to CharacterSkill
+	CharacterSkill{skills(name)} to Skill
+	Character{deity(name)} to Deity
+	Character{blood(name)} to Deity
+	Character{race(name)} to Race
+	Character{career(name)} to Career
+	Item{owner(name)} to Character{inventories(name)}
+    
+    Skill{racialCondition(name)} to Race
+    Skill{careerCondition(name)} to Career
+    Skill{skillCondition(name)} to Skill
+}
+relationship OneToOne {
+	CharacterSkill{skills(name)} to Skill
+}
+
+paginate all with infinite-scroll
+service all with serviceImpl
