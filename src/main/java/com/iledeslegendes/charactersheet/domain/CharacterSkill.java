@@ -32,10 +32,6 @@ public class CharacterSkill implements Serializable {
     @JoinColumn(unique = true)
     private Skill skills;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "racialCondition", "careerCondition", "skillCondition" }, allowSetters = true)
-    private Skill skills;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -74,19 +70,6 @@ public class CharacterSkill implements Serializable {
 
     public void setRealCost(Integer realCost) {
         this.realCost = realCost;
-    }
-
-    public Skill getSkills() {
-        return this.skills;
-    }
-
-    public CharacterSkill skills(Skill skill) {
-        this.setSkills(skill);
-        return this;
-    }
-
-    public void setSkills(Skill skill) {
-        this.skills = skill;
     }
 
     public Skill getSkills() {

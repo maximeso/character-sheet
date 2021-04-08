@@ -18,13 +18,6 @@
       "relationshipName": "skills",
       "otherEntityField": "name",
       "ownerSide": true
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "skill",
-      "otherEntityRelationshipName": "characterSkill",
-      "relationshipName": "skills",
-      "otherEntityField": "name"
     }
   ],
   "entityTableName": "character_skill",
