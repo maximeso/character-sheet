@@ -133,6 +133,10 @@ export const Skill = (props: ISkillProps) => {
                     <Translate contentKey="characterSheetApp.skill.skillCondition">Skill Condition</Translate>{' '}
                     <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th>
+                    <Translate contentKey="characterSheetApp.skill.characterSkill">Character Skill</Translate>{' '}
+                    <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
@@ -154,6 +158,9 @@ export const Skill = (props: ISkillProps) => {
                       {skill.careerCondition ? <Link to={`career/${skill.careerCondition.id}`}>{skill.careerCondition.name}</Link> : ''}
                     </td>
                     <td>{skill.skillCondition ? <Link to={`skill/${skill.skillCondition.id}`}>{skill.skillCondition.name}</Link> : ''}</td>
+                    <td>
+                      {skill.characterSkill ? <Link to={`character-skill/${skill.characterSkill.id}`}>{skill.characterSkill.id}</Link> : ''}
+                    </td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`${match.url}/${skill.id}`} color="info" size="sm" data-cy="entityDetailsButton">

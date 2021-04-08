@@ -12,6 +12,8 @@ import { getEntities as getRaces } from 'app/entities/race/race.reducer';
 import { ICareer } from 'app/shared/model/career.model';
 import { getEntities as getCareers } from 'app/entities/career/career.reducer';
 import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
+import { ICharacterSkill } from 'app/shared/model/character-skill.model';
+import { getEntities as getCharacterSkills } from 'app/entities/character-skill/character-skill.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './skill.reducer';
 import { ISkill } from 'app/shared/model/skill.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -22,7 +24,7 @@ export interface ISkillUpdateProps extends StateProps, DispatchProps, RouteCompo
 export const SkillUpdate = (props: ISkillUpdateProps) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { skillEntity, races, careers, skills, loading, updating } = props;
+  const { skillEntity, races, careers, skills, characterSkills, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/skill');
@@ -36,6 +38,7 @@ export const SkillUpdate = (props: ISkillUpdateProps) => {
     props.getRaces();
     props.getCareers();
     props.getSkills();
+    props.getCharacterSkills();
   }, []);
 
   useEffect(() => {
@@ -52,6 +55,7 @@ export const SkillUpdate = (props: ISkillUpdateProps) => {
         racialCondition: races.find(it => it.id.toString() === values.racialConditionId.toString()),
         careerCondition: careers.find(it => it.id.toString() === values.careerConditionId.toString()),
         skillCondition: skills.find(it => it.id.toString() === values.skillConditionId.toString()),
+        characterSkill: characterSkills.find(it => it.id.toString() === values.characterSkillId.toString()),
       };
 
       if (isNew) {
@@ -89,19 +93,45 @@ export const SkillUpdate = (props: ISkillUpdateProps) => {
                 <Label id="nameLabel" for="skill-name">
                   <Translate contentKey="characterSheetApp.skill.name">Name</Translate>
                 </Label>
-                <AvField id="skill-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="skill-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="costLabel" for="skill-cost">
                   <Translate contentKey="characterSheetApp.skill.cost">Cost</Translate>
                 </Label>
-                <AvField id="skill-cost" data-cy="cost" type="string" className="form-control" name="cost" />
+                <AvField
+                  id="skill-cost"
+                  data-cy="cost"
+                  type="string"
+                  className="form-control"
+                  name="cost"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="restrictionLabel" for="skill-restriction">
                   <Translate contentKey="characterSheetApp.skill.restriction">Restriction</Translate>
                 </Label>
-                <AvField id="skill-restriction" data-cy="restriction" type="text" name="restriction" />
+                <AvField
+                  id="skill-restriction"
+                  data-cy="restriction"
+                  type="text"
+                  name="restriction"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label for="skill-racialCondition">
@@ -160,6 +190,21 @@ export const SkillUpdate = (props: ISkillUpdateProps) => {
                     : null}
                 </AvInput>
               </AvGroup>
+              <AvGroup>
+                <Label for="skill-characterSkill">
+                  <Translate contentKey="characterSheetApp.skill.characterSkill">Character Skill</Translate>
+                </Label>
+                <AvInput id="skill-characterSkill" data-cy="characterSkill" type="select" className="form-control" name="characterSkillId">
+                  <option value="" key="0" />
+                  {characterSkills
+                    ? characterSkills.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/skill" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -185,6 +230,7 @@ const mapStateToProps = (storeState: IRootState) => ({
   races: storeState.race.entities,
   careers: storeState.career.entities,
   skills: storeState.skill.entities,
+  characterSkills: storeState.characterSkill.entities,
   skillEntity: storeState.skill.entity,
   loading: storeState.skill.loading,
   updating: storeState.skill.updating,
@@ -195,6 +241,7 @@ const mapDispatchToProps = {
   getRaces,
   getCareers,
   getSkills,
+  getCharacterSkills,
   getEntity,
   updateEntity,
   createEntity,

@@ -82,19 +82,45 @@ export const ItemUpdate = (props: IItemUpdateProps) => {
                 <Label id="referenceLabel" for="item-reference">
                   <Translate contentKey="characterSheetApp.item.reference">Reference</Translate>
                 </Label>
-                <AvField id="item-reference" data-cy="reference" type="text" name="reference" />
+                <AvField
+                  id="item-reference"
+                  data-cy="reference"
+                  type="text"
+                  name="reference"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="nameLabel" for="item-name">
                   <Translate contentKey="characterSheetApp.item.name">Name</Translate>
                 </Label>
-                <AvField id="item-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="item-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="commentLabel" for="item-comment">
                   <Translate contentKey="characterSheetApp.item.comment">Comment</Translate>
                 </Label>
-                <AvField id="item-comment" data-cy="comment" type="string" className="form-control" name="comment" />
+                <AvField
+                  id="item-comment"
+                  data-cy="comment"
+                  type="string"
+                  className="form-control"
+                  name="comment"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label for="item-owner">

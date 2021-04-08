@@ -77,7 +77,15 @@ export const DeityUpdate = (props: IDeityUpdateProps) => {
                 <Label id="nameLabel" for="deity-name">
                   <Translate contentKey="characterSheetApp.deity.name">Name</Translate>
                 </Label>
-                <AvField id="deity-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="deity-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/deity" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

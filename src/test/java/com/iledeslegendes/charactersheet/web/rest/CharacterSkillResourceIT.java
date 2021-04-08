@@ -120,6 +120,44 @@ class CharacterSkillResourceIT {
 
     @Test
     @Transactional
+    void checkEventIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterSkillRepository.findAll().size();
+        // set the field null
+        characterSkill.setEvent(null);
+
+        // Create the CharacterSkill, which fails.
+
+        restCharacterSkillMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(characterSkill))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<CharacterSkill> characterSkillList = characterSkillRepository.findAll();
+        assertThat(characterSkillList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkRealCostIsRequired() throws Exception {
+        int databaseSizeBeforeTest = characterSkillRepository.findAll().size();
+        // set the field null
+        characterSkill.setRealCost(null);
+
+        // Create the CharacterSkill, which fails.
+
+        restCharacterSkillMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(characterSkill))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<CharacterSkill> characterSkillList = characterSkillRepository.findAll();
+        assertThat(characterSkillList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCharacterSkills() throws Exception {
         // Initialize the database
         characterSkillRepository.saveAndFlush(characterSkill);

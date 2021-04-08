@@ -20,7 +20,8 @@
       "id": "ID",
       "event": "Event",
       "realCost": "Real Cost",
-      "skills": "Skills"
+      "skill": "Skill",
+      "owner": "Owner"
     }
   }
 }

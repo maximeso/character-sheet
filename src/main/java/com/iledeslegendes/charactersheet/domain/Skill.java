@@ -3,6 +3,7 @@ package com.iledeslegendes.charactersheet.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,13 +22,16 @@ public class Skill implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "cost")
+    @NotNull
+    @Column(name = "cost", nullable = false)
     private Integer cost;
 
-    @Column(name = "restriction")
+    @NotNull
+    @Column(name = "restriction", nullable = false)
     private String restriction;
 
     @ManyToOne
@@ -37,8 +41,12 @@ public class Skill implements Serializable {
     private Career careerCondition;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "racialCondition", "careerCondition", "skillCondition" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "racialCondition", "careerCondition", "skillCondition", "characterSkill" }, allowSetters = true)
     private Skill skillCondition;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "skills", "owners" }, allowSetters = true)
+    private CharacterSkill characterSkill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -130,6 +138,19 @@ public class Skill implements Serializable {
 
     public void setSkillCondition(Skill skill) {
         this.skillCondition = skill;
+    }
+
+    public CharacterSkill getCharacterSkill() {
+        return this.characterSkill;
+    }
+
+    public Skill characterSkill(CharacterSkill characterSkill) {
+        this.setCharacterSkill(characterSkill);
+        return this;
+    }
+
+    public void setCharacterSkill(CharacterSkill characterSkill) {
+        this.characterSkill = characterSkill;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

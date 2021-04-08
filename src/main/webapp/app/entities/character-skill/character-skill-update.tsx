@@ -7,8 +7,6 @@ import { Translate, translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { ISkill } from 'app/shared/model/skill.model';
-import { getEntities as getSkills } from 'app/entities/skill/skill.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './character-skill.reducer';
 import { ICharacterSkill } from 'app/shared/model/character-skill.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -19,7 +17,7 @@ export interface ICharacterSkillUpdateProps extends StateProps, DispatchProps, R
 export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { characterSkillEntity, skills, loading, updating } = props;
+  const { characterSkillEntity, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/character-skill');
@@ -29,8 +27,6 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
     if (!isNew) {
       props.getEntity(props.match.params.id);
     }
-
-    props.getSkills();
   }, []);
 
   useEffect(() => {
@@ -44,7 +40,6 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
       const entity = {
         ...characterSkillEntity,
         ...values,
-        skills: skills.find(it => it.id.toString() === values.skillsId.toString()),
       };
 
       if (isNew) {
@@ -82,28 +77,31 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
                 <Label id="eventLabel" for="character-skill-event">
                   <Translate contentKey="characterSheetApp.characterSkill.event">Event</Translate>
                 </Label>
-                <AvField id="character-skill-event" data-cy="event" type="text" name="event" />
+                <AvField
+                  id="character-skill-event"
+                  data-cy="event"
+                  type="text"
+                  name="event"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="realCostLabel" for="character-skill-realCost">
                   <Translate contentKey="characterSheetApp.characterSkill.realCost">Real Cost</Translate>
                 </Label>
-                <AvField id="character-skill-realCost" data-cy="realCost" type="string" className="form-control" name="realCost" />
-              </AvGroup>
-              <AvGroup>
-                <Label for="character-skill-skills">
-                  <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate>
-                </Label>
-                <AvInput id="character-skill-skills" data-cy="skills" type="select" className="form-control" name="skillsId">
-                  <option value="" key="0" />
-                  {skills
-                    ? skills.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.name}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
+                <AvField
+                  id="character-skill-realCost"
+                  data-cy="realCost"
+                  type="string"
+                  className="form-control"
+                  name="realCost"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/character-skill" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
@@ -127,7 +125,6 @@ export const CharacterSkillUpdate = (props: ICharacterSkillUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
-  skills: storeState.skill.entities,
   characterSkillEntity: storeState.characterSkill.entity,
   loading: storeState.characterSkill.loading,
   updating: storeState.characterSkill.updating,
@@ -135,7 +132,6 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getSkills,
   getEntity,
   updateEntity,
   createEntity,

@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,7 @@ public class CharacterResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/characters")
-    public ResponseEntity<Character> createCharacter(@RequestBody Character character) throws URISyntaxException {
+    public ResponseEntity<Character> createCharacter(@Valid @RequestBody Character character) throws URISyntaxException {
         log.debug("REST request to save Character : {}", character);
         if (character.getId() != null) {
             throw new BadRequestAlertException("A new character cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +81,7 @@ public class CharacterResource {
     @PutMapping("/characters/{id}")
     public ResponseEntity<Character> updateCharacter(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Character character
+        @Valid @RequestBody Character character
     ) throws URISyntaxException {
         log.debug("REST request to update Character : {}, {}", id, character);
         if (character.getId() == null) {
@@ -114,7 +116,7 @@ public class CharacterResource {
     @PatchMapping(value = "/characters/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<Character> partialUpdateCharacter(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Character character
+        @NotNull @RequestBody Character character
     ) throws URISyntaxException {
         log.debug("REST request to partial update Character partially : {}, {}", id, character);
         if (character.getId() == null) {

@@ -3,15 +3,18 @@
   "fields": [
     {
       "fieldName": "name",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "cost",
-      "fieldType": "Integer"
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "restriction",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
@@ -35,6 +38,12 @@
       "otherEntityRelationshipName": "skill",
       "relationshipName": "skillCondition",
       "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "characterSkill",
+      "otherEntityRelationshipName": "skill",
+      "relationshipName": "characterSkill"
     }
   ],
   "entityTableName": "skill",

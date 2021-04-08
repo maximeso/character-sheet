@@ -95,7 +95,15 @@ export const CharacterUpdate = (props: ICharacterUpdateProps) => {
                 <Label id="nameLabel" for="character-name">
                   <Translate contentKey="characterSheetApp.character.name">Name</Translate>
                 </Label>
-                <AvField id="character-name" data-cy="name" type="text" name="name" />
+                <AvField
+                  id="character-name"
+                  data-cy="name"
+                  type="text"
+                  name="name"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="alignmentLabel" for="character-alignment">
@@ -124,7 +132,17 @@ export const CharacterUpdate = (props: ICharacterUpdateProps) => {
                 <Label id="experienceLabel" for="character-experience">
                   <Translate contentKey="characterSheetApp.character.experience">Experience</Translate>
                 </Label>
-                <AvField id="character-experience" data-cy="experience" type="string" className="form-control" name="experience" />
+                <AvField
+                  id="character-experience"
+                  data-cy="experience"
+                  type="string"
+                  className="form-control"
+                  name="experience"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                    number: { value: true, errorMessage: translate('entity.validation.number') },
+                  }}
+                />
               </AvGroup>
               <AvGroup>
                 <Label id="partyLabel" for="character-party">

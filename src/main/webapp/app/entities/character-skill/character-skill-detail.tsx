@@ -42,10 +42,6 @@ export const CharacterSkillDetail = (props: ICharacterSkillDetailProps) => {
             </span>
           </dt>
           <dd>{characterSkillEntity.realCost}</dd>
-          <dt>
-            <Translate contentKey="characterSheetApp.characterSkill.skills">Skills</Translate>
-          </dt>
-          <dd>{characterSkillEntity.skills ? characterSkillEntity.skills.name : ''}</dd>
         </dl>
         <Button tag={Link} to="/character-skill" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

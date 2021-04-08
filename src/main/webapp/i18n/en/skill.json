@@ -23,7 +23,8 @@
       "restriction": "Restriction",
       "racialCondition": "Racial Condition",
       "careerCondition": "Career Condition",
-      "skillCondition": "Skill Condition"
+      "skillCondition": "Skill Condition",
+      "characterSkill": "Character Skill"
     }
   }
 }

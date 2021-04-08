@@ -60,6 +60,10 @@ export const SkillDetail = (props: ISkillDetailProps) => {
             <Translate contentKey="characterSheetApp.skill.skillCondition">Skill Condition</Translate>
           </dt>
           <dd>{skillEntity.skillCondition ? skillEntity.skillCondition.name : ''}</dd>
+          <dt>
+            <Translate contentKey="characterSheetApp.skill.characterSkill">Character Skill</Translate>
+          </dt>
+          <dd>{skillEntity.characterSkill ? skillEntity.characterSkill.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/skill" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

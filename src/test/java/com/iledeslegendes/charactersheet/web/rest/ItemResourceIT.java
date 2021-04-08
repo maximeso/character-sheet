@@ -120,6 +120,57 @@ class ItemResourceIT {
 
     @Test
     @Transactional
+    void checkReferenceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = itemRepository.findAll().size();
+        // set the field null
+        item.setReference(null);
+
+        // Create the Item, which fails.
+
+        restItemMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(item)))
+            .andExpect(status().isBadRequest());
+
+        List<Item> itemList = itemRepository.findAll();
+        assertThat(itemList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = itemRepository.findAll().size();
+        // set the field null
+        item.setName(null);
+
+        // Create the Item, which fails.
+
+        restItemMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(item)))
+            .andExpect(status().isBadRequest());
+
+        List<Item> itemList = itemRepository.findAll();
+        assertThat(itemList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkCommentIsRequired() throws Exception {
+        int databaseSizeBeforeTest = itemRepository.findAll().size();
+        // set the field null
+        item.setComment(null);
+
+        // Create the Item, which fails.
+
+        restItemMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(item)))
+            .andExpect(status().isBadRequest());
+
+        List<Item> itemList = itemRepository.findAll();
+        assertThat(itemList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllItems() throws Exception {
         // Initialize the database
         itemRepository.saveAndFlush(item);
