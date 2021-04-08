@@ -1,0 +1,29 @@
+{
+  "characterSheetApp": {
+    "skill": {
+      "home": {
+        "title": "Skills",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Skill",
+        "createOrEditLabel": "Créer ou éditer un Skill",
+        "notFound": "Aucun Skill trouvé"
+      },
+      "created": "Un nouveau Skill a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Skill avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Skill avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Skill {{ id }} ?"
+      },
+      "detail": {
+        "title": "Skill"
+      },
+      "id": "ID",
+      "name": "Name",
+      "cost": "Cost",
+      "restriction": "Restriction",
+      "racialCondition": "Racial Condition",
+      "careerCondition": "Career Condition",
+      "skillCondition": "Skill Condition"
+    }
+  }
+}

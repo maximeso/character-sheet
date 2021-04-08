@@ -1,0 +1,76 @@
+{
+  "name": "Character",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "alignment",
+      "fieldType": "Alignment",
+      "fieldValues": "LAWFUL_GOOD,NEUTRAL_GOOD,CHAOTIC_GOOD,LAWFUL_NEUTRAL,NEUTRAL_NEUTRAL,CHAOTIC_NEUTRAL,LAWFUL_EVIL,NEUTRAL_EVIL,CHAOTIC_EVIL"
+    },
+    {
+      "fieldName": "experience",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "party",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "characterSkill",
+      "otherEntityRelationshipName": "character",
+      "relationshipName": "skills",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deity",
+      "otherEntityRelationshipName": "character",
+      "relationshipName": "deity",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "deity",
+      "otherEntityRelationshipName": "character",
+      "relationshipName": "blood",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "race",
+      "otherEntityRelationshipName": "character",
+      "relationshipName": "race",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "career",
+      "otherEntityRelationshipName": "character",
+      "relationshipName": "career",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "item",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "inventories",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "character",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210408134258"
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Skill.
+    -->
+    <changeSet id="20210408134304-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="racial_condition_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__racial_condition_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="race"/>
+
+        <addForeignKeyConstraint baseColumnNames="career_condition_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__career_condition_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="career"/>
+
+        <addForeignKeyConstraint baseColumnNames="skill_condition_id"
+                                 baseTableName="skill"
+                                 constraintName="fk_skill__skill_condition_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="skill"/>
+    </changeSet>
+</databaseChangeLog>

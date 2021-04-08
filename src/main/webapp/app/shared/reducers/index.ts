@@ -12,6 +12,34 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import character, {
+  CharacterState
+} from 'app/entities/character/character.reducer';
+// prettier-ignore
+import characterSkill, {
+  CharacterSkillState
+} from 'app/entities/character-skill/character-skill.reducer';
+// prettier-ignore
+import item, {
+  ItemState
+} from 'app/entities/item/item.reducer';
+// prettier-ignore
+import deity, {
+  DeityState
+} from 'app/entities/deity/deity.reducer';
+// prettier-ignore
+import career, {
+  CareerState
+} from 'app/entities/career/career.reducer';
+// prettier-ignore
+import race, {
+  RaceState
+} from 'app/entities/race/race.reducer';
+// prettier-ignore
+import skill, {
+  SkillState
+} from 'app/entities/skill/skill.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -25,6 +53,13 @@ export interface IRootState {
   readonly passwordReset: PasswordResetState;
   readonly password: PasswordState;
   readonly settings: SettingsState;
+  readonly character: CharacterState;
+  readonly characterSkill: CharacterSkillState;
+  readonly item: ItemState;
+  readonly deity: DeityState;
+  readonly career: CareerState;
+  readonly race: RaceState;
+  readonly skill: SkillState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -40,6 +75,13 @@ const rootReducer = combineReducers<IRootState>({
   passwordReset,
   password,
   settings,
+  character,
+  characterSkill,
+  item,
+  deity,
+  career,
+  race,
+  skill,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

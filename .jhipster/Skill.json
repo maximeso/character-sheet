@@ -1,0 +1,50 @@
+{
+  "name": "Skill",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "restriction",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "race",
+      "otherEntityRelationshipName": "skill",
+      "relationshipName": "racialCondition",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "career",
+      "otherEntityRelationshipName": "skill",
+      "relationshipName": "careerCondition",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "skill",
+      "relationshipName": "skillCondition",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "skill",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210408134304"
+}
