@@ -56,7 +56,6 @@ entity Skill {
 
 relationship ManyToOne {
 	Character{skills(name)} to CharacterSkill
-	CharacterSkill{skills(name)} to Skill
 	Character{deity(name)} to Deity
 	Character{blood(name)} to Deity
 	Character{race(name)} to Race
